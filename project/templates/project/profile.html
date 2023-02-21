@@ -1,0 +1,40 @@
+{% extends 'project/header.html' %}
+{%block head%}
+<title>Profile</title>
+{%endblock%}
+
+{%block content%}
+<style style="text/css">
+.header{
+  font-family: sans-serif;
+  font:verdana;
+}
+.body1{
+  font-family: sans-serif;
+  font: verdana;
+  font-size: 17px;
+}
+.button{
+  font-family: sans-serif;
+  font: verdana;
+  font-size: 18px;
+  background-color: #CAEBF2;
+  padding:20px;
+}
+
+</style>
+<div class="container">
+  <div class="header">
+    <h1>Profile</h1>
+  </div>
+  <hr>
+  <div class="body1">
+    <p><b>Username:</b> {{user}}</p>
+    <p><b>First Name:</b> {{user.first_name}}</p>
+    <p><b>Last Name:</b> {{user.last_name}}</p>
+    <p><b>Email Address:</b> {{user.email}}</p>
+    <p><button class="button"><a href="/project/edit/">Edit Profile</a></button></p>
+  </div>
+</div>
+<br>
+{%endblock%}

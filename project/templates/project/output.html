@@ -1,0 +1,110 @@
+{% extends 'project/header.html' %}
+{%block head%}
+<title>Stock</title>
+{%endblock%}
+{%block content%}
+  <style style="text/css">
+  .header{
+    font-family: sans-serif;
+    font-size-adjust: auto;
+    font:verdana;
+  }
+  .table{
+    display:table;
+    border-spacing:10px;
+    border-color:red;
+    border-width: medium;
+    width: 45%;
+    text-align-last: center;
+    float: left;
+  }
+  .table td{
+    padding:8px;
+  }
+  .table tr:hover{
+    background-color: #FF3B3F;
+  }
+
+  .list-group{
+    float:right;
+    width:50%;
+    height:auto;
+    font-size: 24px;
+    position:relative;
+  }
+  .tab-content{
+    background-color: #FF3B3F;
+    display:inline-block;
+    height:auto;
+    float:right;
+    position:inherit;
+    width:50%;
+  }
+  .tab-pane{
+    font-size: 22px;
+    padding: 45px;
+  }
+  .list-group-item{
+    background-color: #CAEBF2;
+
+  }
+  .row{
+    font-family: sans-serif;
+    font: verdana;
+    margin-top:80px;
+  }
+  </style>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="col-sm-6"><h1>Stock</h1></div>
+        {% if request.user.is_superuser%}
+          <div class="col-sm-6"><h1><a href="/project/budget">Budget</a></h1></div>
+        {%endif%}
+
+      </div>
+
+
+      <div class="row">
+        <hr>
+        <div class="col-sm-6"><h3>There are {{stock_count}} items left in stock:</h3></div>
+        <div class="col-sm-6"><h3>Most Popular Items:</h3></div>
+      </div>
+
+      <table class="table" border="2">
+        <tr>
+          <th>Item Name</th>
+          <th>Price </th>
+          <th> No. in Stock</th>
+        </tr>
+        {%for a in all%}
+        <tr>
+          <td>{{a.0}}</td>
+          <td>£{{a.1}}</td>
+          <td>{{a.2}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+      <div class="list-group" id="myList" role="tablist">
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#1" role="tab">1. {{top_four.0}}</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#2" role="tab">2. {{top_four.3}}</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#3" role="tab">3. {{top_four.6}}</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#4" role="tab">4. {{top_four.9}}</a>
+      </div>
+      <div class="tab-content">
+        <div class="tab-pane" id="1" role="tabpanel">There are <b>{{top_four.2}}</b> {{top_four.0}}'s left in stock and they cost £{{top_four.1}}.</div>
+        <div class="tab-pane" id="2" role="tabpanel">There are <b>{{top_four.5}}</b> {{top_four.3}}'s left in stock and they cost £{{top_four.4}}.</div>
+        <div class="tab-pane" id="3" role="tabpanel">There are <b>{{top_four.8}}</b> {{top_four.6}}'s left in stock and they cost £{{top_four.7}}.</div>
+        <div class="tab-pane" id="4" role="tabpanel">There are <b>{{top_four.11}}</b> {{top_four.9}}'s left in stock and they cost £{{top_four.10}}.</div>
+      </div>
+    </div>
+
+  <script>
+  $('#myList a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+
+  </script>
+  </body>
+{%endblock%}

@@ -1,0 +1,32 @@
+{% extends "project/header.html" %}
+{%block head%}
+<title>Remove Items</title>
+{%endblock%}
+{%block content%}
+<style style="text/css">
+.header{
+  font-family: sans-serif;
+  font:verdana;
+}
+.body1{
+  font-family: sans-serif;
+  font: verdana;
+  font-size: 17px;
+}
+</style>
+<div class="container">
+  <div class="header">
+    <h1>Remove Items</h1>
+  </div>
+  <hr>
+  <div class="body1">
+    <form method="post">
+      {%csrf_token%}
+      {{form.as_p}}
+      <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <button type="submit"><a href="/project/remove_items">Complete</a></button>
+  </div>
+</div>
+{%endblock%}
